@@ -5,4 +5,11 @@
       width: 16.575%;
       
     }
- 
+
+    .card-body{
+        border: solid 1px blue;
+
+    }
+    .form{
+        border: solid 1px blue;
+    }

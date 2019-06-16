@@ -1,4 +1,4 @@
-// 1. Initialize Firebase
+// Initializing Firebase
 var firebaseConfig = {
     apiKey: "AIzaSyAAsa_PCyMTavz_UxaeVgcvQJKiWeUIBAE",
     authDomain: "sungs-project1.firebaseapp.com",
@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-// 2. Button for adding Trains
+//  Button for adding Trains
 $("#add-train-btn").on("click", function (event) {
     event.preventDefault();
 
@@ -55,7 +55,7 @@ $("#add-train-btn").on("click", function (event) {
 
 });
 
-// 3. Create Firebase event for adding train to the database and a row in the html when a user adds an entry
+//  Firebase event for adding child train to the database and a row in the html when a user adds an entry child
 database.ref().on("child_added", function (childSnapshot) {
     // console.log(childSnapshot.val());
     //variable to calculate minsAway field
