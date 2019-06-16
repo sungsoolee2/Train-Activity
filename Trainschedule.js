@@ -11,9 +11,9 @@
 var firebaseConfig = {
     apiKey: "AIzaSyAAsa_PCyMTavz_UxaeVgcvQJKiWeUIBAE",
     authDomain: "sungs-project1.firebaseapp.com",
-    databaseURL: "https://sungs-trainactivity.firebaseio.com",
-    projectId: "sungs-trainactivity",
-    storageBucket: "sungs-trainactivity.appspot.com",
+    databaseURL: "https://sungs-project1.firebaseio.com",
+    projectId: "sungs-project1",
+    storageBucket: "sungs-project1.appspot.com",
     messagingSenderId: "58788608199",
     appId: "1:58788608199:web:54ff06adc339a74e"
   };
@@ -29,18 +29,20 @@ $("#add-train-btn").on("click", function(event) {
      var trainName = $("#train-name-input").val().trim();
     var trainDestination = $("#destination-input").val().trim();
 //   var trainfrequency = moment($("#frequency-input").val().trim(), "MM/DD/YYYY").format("X");
-    var trainfrequency = $("#frequency-input").val().trim();
-    var nextArrival = $moment($("#nextarrival-input").val().trim(),).format("LT"); 
+    var trainFrequency = $("#frequency-input").val().trim();
+    var nextArrival = $("#nextarrival-input").val().trim();
+    // var nextArrival = moment($("#nextarrival-input").val().trim(),).format("LT"); 
     var minAway = $("#minutesaway-input").val().trim();
+console.log(nextArrival);
 
 
   // Creates local "temporary" object for holding train data
   var newTrain = {
-    name: traName,
-    destination: traDestination,
-    frequency: traFrequency,
-    arrival: traArrival,
-    away: traAway
+    name: trainName,
+    destination: trainDestination,
+    frequency: trainFrequency,
+    arrival: nextArrival,
+    away: minAway
 
   };
 
@@ -88,7 +90,7 @@ database.ref().on("child_added", function(childSnapshot) {
   // Calculate the months worked using hardcore math
   // To calculate the months worked
 //   var trainNext = moment().diff(moment(empStart, "X"), "months");
-  var trainNext = moment().format('LT'); 
+  var trainNext = moment().format('LT'); //current time//
 console.log(trainNext);
 
   // Calculate the total billed rate
@@ -109,6 +111,19 @@ console.log(trainNext);
   // Append the new row to the table
   $("#train-table > tbody").append(newRow);
 });
+
+function formatAMPM(nextArrival) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+  
+  console.log(formatAMPM(nextArrival));
 
 // Example Time Math
 // -----------------------------------------------------------------------------
