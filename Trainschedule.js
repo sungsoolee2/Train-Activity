@@ -38,11 +38,11 @@ $("#add-train-btn").on("click", function (event) {
     database.ref().push(newTrain);
 
     // Logs everything to console
-    console.log(newTrain.name);
-    console.log(newTrain.destination);
-    console.log(newTrain.frequency);
-    console.log(newTrain.firstTrain);
-    console.log(newTrain.dateAdded);
+    // console.log(newTrain.name);
+    // console.log(newTrain.destination);
+    // console.log(newTrain.frequency);
+    // console.log(newTrain.firstTrain);
+    // console.log(newTrain.dateAdded);
 
     alert("Train successfully added");
 
@@ -69,35 +69,34 @@ database.ref().on("child_added", function (childSnapshot) {
     var dateAdded = childSnapshot.val().dateAdded;
 
     // Train Info
-    console.log(trainName);
-    console.log(trainDestination);
-    console.log(trainFrequency);
-    console.log(minsAway);
-    console.log(dateAdded);
+    // console.log(trainName);
+    // console.log(trainDestination);
+    // console.log(trainFrequency);
+    // console.log(dateAdded);
 
 
-    // Change year so first train comes before now
+    //  First train comes before now assign firstTrainNew var//
     var firstTrainNew = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
-    console.log(firstTrainNew);
+    // console.log(firstTrainNew);
 
     // Difference time between the current and firstTrain
     var diffTime = moment().diff(moment(firstTrainNew), "minutes");
     var remainder = diffTime % trainFrequency;
-    console.log(diffTime);
-    console.log(remainder);
+    // console.log(diffTime);
+    // console.log(remainder);
 
     // Minutes until next train
     var minsAway = trainFrequency - remainder;
-    console.log(minsAway);
+    // console.log(minsAway);
 
     // Add minsAway to get the next train time
     var nextArrival = moment().add(minsAway, "minutes");
     nextArrival = moment(nextArrival).format("hh:mm");
-    console.log(nextArrival);
+    // console.log(nextArrival);
 
     //current time in military time format//
-    var currentTime = moment().format('HHmm');
-    console.log(currentTime);
+    // var currentTime = moment().format('HHmm');
+    // // console.log(currentTime);
 
 
     // Create the new row
